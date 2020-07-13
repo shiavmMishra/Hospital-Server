@@ -1,14 +1,14 @@
 const passport=require('passport');
 const JWTStrategy=require('passport-jwt').Strategy;
 const ExtractJWT=require('passport-jwt').ExtractJwt;
-const Docter=require('../models/doctor');
+const Doctor=require('../models/doctor');
 
 let opts={
     jwtFromRequest :ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey : 'docter'
+    secretOrKey : 'hellodoctor'
 }
 passport.use(new JWTStrategy(opts, function(jwt_payload, done) {
-    Docter.findOne({id: jwt_payload.sub}, function(err, user) {
+    Doctor.findOne({id: jwt_payload.sub}, function(err, user) {
         if (err) {
             return done(err, false);
         }
